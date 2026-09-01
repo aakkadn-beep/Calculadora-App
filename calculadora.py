@@ -1,6 +1,22 @@
 import tkinter as tk
 from tkinter import messagebox
 
+
+#========================================================================================
+def Sumar(a, b):
+    return a + b
+
+def Restar(a, b):
+    return a - b
+
+def Multiplicar(a, b):
+    return a * b
+
+def Dividir(a, b):
+    if b == 0:
+        raise ZeroDivisionError("No se puede dividir entre 0")
+    return a / b
+#========================================================================================
 class CalculadoraGUI:
     def __init__(self, root):
         self.root = root
@@ -45,3 +61,71 @@ class CalculadoraGUI:
                 command=lambda t=texto: self.procesar_evento(t)
             )
             btn.grid(row=fila, column=columna, columnspan=colspan, padx=3, pady=3, sticky="nsew")
+
+    def calcular_resultado(self, segundo_operando):
+        """Evalúa la operación según el operador guardado usando match case"""
+        match self.operador:
+            case '+':
+                return Sumar(self.primer_operando, segundo_operando)
+            case '-':
+                return Restar(self.primer_operando, segundo_operando)
+            case '*':
+                return Multiplicar(self.primer_operando, segundo_operando)
+            case '/':
+                return Dividir(self.primer_operando, segundo_operando)
+            case _:
+                return segundo_operando
+
+    def procesar_evento(self, char):
+        # Evaluación principal del evento mediante Match Case
+        match char:
+            case 'C':
+                self.expresion = ""
+                self.pantalla.delete(0, tk.END)
+                self.pantalla.insert(0, "0")
+                self.nuevo_numero = True
+
+            case '.':
+                texto_actual = self.pantalla.get()
+                if self.nuevo_numero:
+                    self.pantalla.delete(0, tk.END)
+                    self.pantalla.insert(0, "0.")
+                    self.nuevo_numero = False
+                elif "." not in texto_actual:
+                    self.pantalla.insert(tk.END, ".")
+
+            case '+' | '-' | '*' | '/':
+                self.primer_operando = float(self.pantalla.get())
+                self.operador = char
+                self.nuevo_numero = True
+
+            case '=':
+                if hasattr(self, 'operador') and hasattr(self, 'primer_operando'):
+                    try:
+                        segundo_operando = float(self.pantalla.get())
+                        res = self.calcular_resultado(segundo_operando)
+
+                        if res.is_integer():
+                            res = int(res)
+
+                        self.pantalla.delete(0, tk.END)
+                        self.pantalla.insert(0, str(res))
+                        self.nuevo_numero = True
+                        del self.operador
+
+                    except ZeroDivisionError as e:
+                        self.pantalla.delete(0, tk.END)
+                        self.pantalla.insert(0, "Error")
+                        messagebox.showerror("Error Matemático", str(e))
+                        self.nuevo_numero = True
+                    except ValueError:
+                        self.pantalla.delete(0, tk.END)
+                        self.pantalla.insert(0, "Error")
+
+            case _ if char.isdigit():
+                if self.pantalla.get() == "0" or self.nuevo_numero:
+                    self.pantalla.delete(0, tk.END)
+                    self.pantalla.insert(0, char)
+                    self.nuevo_numero = False
+                else:
+                    self.pantalla.insert(tk.END, char)
