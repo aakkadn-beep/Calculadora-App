@@ -1,6 +1,6 @@
 # Calculadora-App
 
-# Justificación del Proyecto}
+# Justificación del Proyecto
 Elegimos 'Calculadora-App' porque resuelve la necesidad de realizar operaciones matemáticas básicas en una interfaz limpia e intuitiva, permitiendo al usuario efectuar cálculos simples y encadenados sin errores de formato de entrada. Su alcance es adecuado para poner en práctica la metodología de desarrollo y el trabajo colaborativo en un proyecto de corta duración.
 
 # Metodología
@@ -19,5 +19,27 @@ Utilizaremos la metodología ágil Kanban debido a que el mini-proyecto cuenta c
 
 - Como usuario, quiero evitar la entrada de múltiples puntos decimales en un mismo número.
 
-## Integrantes del equipo
+# Arquitectura del proyecto
+```
+ Calculadora-App/
+ ├── Diagra_Flujo_QuizApp.drawio.png       # Diagrama de flujo del sistema
+ ├── calculadora.py                        # Código fuente ejecutable de la interfaz gráfica (Tkinter)
+ └── README.md                             # Documentación principal del repositorio
+ ```
+
+# Instrucciones de Ejecución
+## 1. Clonar el repositorio
+git clone <URL_DE_TU_REPOSITORIO>
+
+## 2. Entrar a la carpeta del proyecto
+cd Calculadora-App
+
+## 3. Ejecutar la aplicación
+python calculadora.py
+
+# Diagrama de flujo
+<img width="1101" height="1082" alt="Diagrama de flujo drawio" src="https://github.com/user-attachments/assets/e32e7a6d-7dca-4490-95c6-de5c51d28930" />
+
+
+## Integrantes
 - Kenia Guadalupe Hernándes Torres — @aakkadn-beep
