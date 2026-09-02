@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
 
-
 #========================================================================================
 def Sumar(a, b):
     return a + b
@@ -129,3 +128,9 @@ class CalculadoraGUI:
                     self.nuevo_numero = False
                 else:
                     self.pantalla.insert(tk.END, char)
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = CalculadoraGUI(root)
+    root.mainloop()
